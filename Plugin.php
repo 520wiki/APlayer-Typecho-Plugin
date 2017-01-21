@@ -532,8 +532,8 @@ EOF;
                             'title' => $data['name'],
                             'album_name' => $data['album']['name'],
                             'artist' => $data['artists'][0]['name'],
-                            'location' => str_replace('http://m', 'http://p', $data['mp3Url']),
-                            'pic' => $data['album']['blurPicUrl'].'?param=106x106',
+                            'location' => str_replace('http://m', 'https://p', $data['mp3Url']),
+                            'pic' => str_replace("http://","https://",$data['album']['blurPicUrl'].'?param=106x106'),
                             'lyric' => $lyric
                     );
                 }
