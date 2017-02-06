@@ -167,6 +167,7 @@ class APlayer_Plugin implements Typecho_Plugin_Interface
 <script>
 var len = APlayerOptions.length;
 for(var i=0;i<len;i++){
+  if(document.getElementById('player' + APlayerOptions[i]['id'])) {
     APlayers[i] = new APlayer({
         element: document.getElementById('player' + APlayerOptions[i]['id']),
         narrow: false,
@@ -178,6 +179,7 @@ for(var i=0;i<len;i++){
         theme: APlayerOptions[i]['theme']
         });
     APlayers[i].init();
+  }
 }
 </script>
 <!-- APlayer End -->
