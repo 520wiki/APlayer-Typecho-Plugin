@@ -528,13 +528,15 @@ EOF;
                     //获取歌词
                     $lyric = self::get_netease_lyric($data['id']);
                     if ($lyric) $lyric = $lyric['lyric'];
-
+                    $mp3Url = (new  \Metowolf\Meting('netease'))->url($data['id']);
+                    $mp3Url = json_decode($mp3Url, true);
+                    $mp3Url = str_replace('http://','https://',$mp3Url['data'][0]['url']);
                     $list[$data['id']] = array(
                             'song_id' => $data['id'],
                             'title' => $data['name'],
                             'album_name' => $data['album']['name'],
                             'artist' => $data['artists'][0]['name'],
-                            'location' => str_replace('http://m', 'https://p', $data['mp3Url']),
+                            'location' => $mp3Url,//str_replace('http://m', 'https://p', $data['mp3Url']),
                             'pic' => str_replace("http://","https://",$data['album']['blurPicUrl'].'?param=106x106'),
                             'lyric' => $lyric
                     );
