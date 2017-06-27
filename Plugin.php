@@ -1,5 +1,6 @@
 <?php
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
+if(!extension_loaded('Meting'))include_once 'include/Meting.php';
 
 /**
  * 炒鸡漂亮的html5播放器APlayer插件，支持在文章中插入html5播放器，启用前请确保插件的cache目录可写
