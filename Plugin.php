@@ -66,8 +66,8 @@ class APlayer_Plugin implements Typecho_Plugin_Interface
             self::deletefile();
 
         $listexpire = new Typecho_Widget_Helper_Form_Element_Text(
-            'listexpire', null, '43200',
-            _t('歌单更新周期'), _t('设置歌单的缓存时间（单位：秒），超过设定时间后歌单将自动更新'));
+            'listexpire', null, '900',
+            _t('歌单更新周期'), _t('设置歌单的缓存时间（单位：秒），超过设定时间后歌单将自动更新（网易云音乐MP3路径会定时更新，建议设置缓存时间为900秒）'));
         $form->addInput($listexpire);
 
         $maintheme = new Typecho_Widget_Helper_Form_Element_Text(
