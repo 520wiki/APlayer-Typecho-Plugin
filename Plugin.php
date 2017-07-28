@@ -7,7 +7,7 @@ if(!extension_loaded('Meting'))include_once 'include/Meting.php';
  * 
  * @package APlayer
  * @author ZGQ
- * @version 1.4.11
+ * @version 1.4.14
  * @dependence 13.12.12-*
  * @link https://github.com/zgq354/APlayer-Typecho-Plugin
  */
@@ -145,7 +145,6 @@ class APlayer_Plugin implements Typecho_Plugin_Interface
         $playerurl = Helper::options()->pluginUrl.'/APlayer/assets/dist/';
         echo '
 <!-- APlayer Start -->
-<link rel="stylesheet" type="text/css" href="'.$playerurl.'APlayer.min.css" />
 <script>var APlayers = [];var APlayerOptions = [];</script>
 <!-- APlayer End -->
 ';
@@ -164,7 +163,7 @@ class APlayer_Plugin implements Typecho_Plugin_Interface
         
         echo <<<EOF
 <!-- APlayer Start -->
-<script type="text/javascript" src="{$playerurl}APlayer.min.js"></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/aplayer/1.6.0/APlayer.min.js" data-no-instant></script>
 <script>
 var len = APlayerOptions.length;
 for(var i=0;i<len;i++){
@@ -179,7 +178,7 @@ for(var i=0;i<len;i++){
             music: APlayerOptions[i]['music'],
             theme: APlayerOptions[i]['theme']
             });
-        APlayers[i].init();
+        //APlayers[i].init();
     }
 }
 </script>
@@ -454,10 +453,10 @@ EOF;
         $result = self::cache_get($key);
         //列表更新周期
         $listexpire = Typecho_Widget::widget('Widget_Options')->plugin('APlayer')->listexpire;
-        if ($listexpire === null) $listexpire = 43200;
+        if ($listexpire === null) $listexpire = 900;
         $listexpire = (int)$listexpire;
         //缓存过期或者找不到的时候则重新请求服务器（设置过期时间是因为歌单等信息可能会发生改变），否则返回缓存
-        if ($result && isset($result['data']) && ($type == "song" || (isset($result['time']) && (time() - $result['time']) < $listexpire))){
+        if ($result && isset($result['data']) && ($type == "song" && (isset($result['time']) && (time() - $result['time']) < $listexpire))){
             $data = $result['data'];
         }else{
             $data = self::get_netease_music($id, $type);
@@ -538,7 +537,7 @@ EOF;
                             'album_name' => $data['album']['name'],
                             'artist' => $data['artists'][0]['name'],
                             'location' => $mp3Url,//str_replace('http://m', 'https://p', $data['mp3Url']),
-                            'pic' => str_replace("http://","https://",$data['album']['blurPicUrl'].'?param=106x106'),
+                            'pic' => str_replace('http://','https://',$data['album']['blurPicUrl'].'?param=106x106'),
                             'lyric' => $lyric
                     );
                 }
