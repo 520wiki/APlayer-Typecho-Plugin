@@ -528,7 +528,8 @@ EOF;
                     //获取歌词
                     $lyric = self::get_netease_lyric($data['id']);
                     if ($lyric) $lyric = $lyric['lyric'];
-                    $mp3Url = (new  \Metowolf\Meting('netease'))->url($data['id']);
+                    $meting = new \Metowolf\Meting('netease');
+                    $mp3Url = $meting->url($data['id']);
                     $mp3Url = json_decode($mp3Url, true);
                     $mp3Url = str_replace('http://','https://',$mp3Url['data'][0]['url']);
                     $list[$data['id']] = array(
