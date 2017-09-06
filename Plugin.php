@@ -7,7 +7,7 @@ if(!extension_loaded('Meting'))include_once 'include/Meting.php';
  * 
  * @package APlayer
  * @author ZGQ
- * @version 1.4.14
+ * @version 1.4.15
  * @dependence 13.12.12-*
  * @link https://github.com/zgq354/APlayer-Typecho-Plugin
  */
